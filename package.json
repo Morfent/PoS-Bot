@@ -1,0 +1,46 @@
+{
+  "name": "PS-Roleplaying-Bot-2",
+  "version": "0.0.1",
+  "description": "A Pokémon Showdown roleplaying bot",
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Ben Davies"
+  },
+  "contributors": [
+    {
+      "name": "Howell Li"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Morfent/PS-Roleplaying-Bot-2.git"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "build": "gulp build"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "sockjs-client": "^1.1.1",
+    "sqlite3": "^3.1.4"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.14.0",
+    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.12.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-1": "^6.13.0",
+    "babel-preset-stage-2": "^6.13.0",
+    "babel-preset-stage-3": "^6.11.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.4.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-build": "^0.5.3",
+    "mocha": "^3.0.2"
+  }
+}
