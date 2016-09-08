@@ -1,11 +1,23 @@
 'use strict';
 
-const Immutable = require('immutable');
-const Map = Immutable.Map;
-const Set = Immutable.Set;
+const {Map, Set} = require('immutable');
 
 module.exports = {
-	server: Map({hostname: 'sim.psim.us', port: 443, id: 'showdown', protocol: 'https'}),
-	login: Map({username: '', password: '', avatar: 0}),
-	rooms: Map({publc: Set([]), hidden: Set([]), private: Set([]), group: Set([])})
+	server: Map({
+		protocol: 'https',
+		hostname: 'sim.psim.us',
+		port: 443,
+		id: 'showdown'
+	}),
+	login: Map({
+		username: '',
+		password: '',
+		avatar: 0
+	}),
+	rooms: Map({
+		publc: Set(),
+		hidden: Set(),
+		private: Set(),
+		group: Set()
+	})
 };

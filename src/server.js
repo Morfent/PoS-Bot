@@ -13,12 +13,7 @@ let sock = new SockJS(url);
 sock.onopen = () => {};
 sock.onmessage = (e) => {
 	let message = e.data;
-	if (message.startsWith('|updateuser|')) {
-		name = message.split('|')[2];
-		console.log('\n\e[1m' + name + ' is your guest nick!\e[m\n');
-	} else {
-		console.log(message);
-	}
+	console.log(message);
 };
 sock.onclose = () => process.exit(0);
 

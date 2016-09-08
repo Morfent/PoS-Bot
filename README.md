@@ -1,12 +1,10 @@
 # PS-Roleplaying-Bot-2
 
-This is a Pokémon Showdown bot created for roleplaying purposes.
+This is a Pokémon Showdown bot created for roleplaying purposes (for now).
 
 Instructions
 ============
 
-If you don't know what you're doing, don't use this bot. To install, run `npm install`.
-To transpile, run `npm build`. To run the bot, run `npm start`.
-
-If `npm build` doesn't work, run `npm install -g gulp`, then run `gulp build` to build the bot.
-
+If you don't know what you're doing, don't use this bot. To install, run
+`npm install`. To run the but, simply use `npm start`. The code for the bot will
+be transpiled by Babel beforehand.

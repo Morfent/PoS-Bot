@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "node ./dist/app.js",
-    "build": "gulp build"
+    "prestart": "gulp build"
   },
   "dependencies": {
     "immutable": "^3.8.1",

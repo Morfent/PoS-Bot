@@ -7,7 +7,7 @@ const chai = require('chai');
 const eslint = require('eslint');
 
 gulp.task('build', () =>
-	gulp.src(__dirname + '/src/**/*.js')
+	gulp.src('src/**/*.js')
 		.pipe(babel())
-		.pipe(gulp.dest(__dirname + '/dist'))
+		.pipe(gulp.dest('dist'))
 );
