@@ -1,10 +1,22 @@
-{
+{	
 	"presets": [
-		"es2015",
-		"stage-1"
+		"latest",
+		"stage-1",
 	],
 	"plugins": [
 		"transform-es2015-modules-umd",
-		"transform-es2015-destructuring"
-	]
+		"syntax-async-functions",
+		"syntax-object-rest-spread",
+		"transform-async-functions",
+		"transform-object-rest-spread",
+		["transform-runtime", {
+			"polyfill": false,
+			"regenerator": true,
+		}],
+		["transform-regenerator", {
+			"asyncGenerators": true,
+			"generators": false,
+			"async": true,
+		}],
+	],
 }
