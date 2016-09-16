@@ -1,7 +1,7 @@
 {
-  "name": "PS-Roleplaying-Bot-2",
+  "name": "PoS-Bot",
   "version": "0.0.1",
-  "description": "A Pokémon Showdown roleplaying bot",
+  "description": "A Pokémon Showdown bot",
   "license": "BSD-3-Clause",
   "author": {
     "name": "Ben Davies"
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Morfent/PS-Roleplaying-Bot-2.git"
+    "url": "https://github.com/Morfent/PoS-Bot.git"
   },
   "engines": {
     "node": ">=6.0.0"

@@ -1,4 +1,4 @@
-# PS-Roleplaying-Bot-2
+# PoS-Bot
 
 This is a Pokémon Showdown bot fully written in ES6+ JavaScript using Babel.
 Unlike other Pokémon Showdown bots out there written in JavaScript, this allows
