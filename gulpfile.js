@@ -20,7 +20,7 @@ gulp.task('lint', () => {
 		.pipe(eslint.failOnError());
 });
 
-gulp.task('test', ['lint'], function () {
+gulp.task('test', ['lint'], () => {
 	return gulp.src('test/**/*.js')
 		.pipe(mocha({
 			reporter: 'spec'
