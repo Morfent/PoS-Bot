@@ -1,45 +1,62 @@
 'use strict';
 
-import csp from 'js-csp';
-
 import verifyIdentity from './utils/loginServerApi';
+import messageTypes from './utils/messageTypes';
+
+import Connection from './connection';
 
 class Bot {
-	constructor(publication, outCh) {
+	constructor() {
 		this.name = '';
 		this.isRegistered = false;
 		this.rank = ' ';
 		this.avatar = 0;
-		this.autojoin = Config.rooms.toArray();
+		this.autojoin = new Set(Config.rooms.toArray());
 
 		// TODO: get list of rooms from |queryresponse|rooms to determine if
 		// they're public or not.
 		// this.roomsData = Set();
 
-		this.publication = publication;
-		this.outCh = outCh;
-
-		// Bots subscribe to messages originating from the global room.
-		let brokerCh = this.brokerCh = csp.chan(50);
-		csp.operations.pub.sub(publication, 'global', brokerCh);
-
-		let self = this;
-		csp.go(function* () {
-			let message = yield brokerCh;
-			while (message !== csp.CLOSED) {
-				self.parseBlock(message);
-				message = yield brokerCh;
-			}
-		});
+		this.connection = new Connection(
+			Config.server.get('url'),
+			Config.server.get('_reserved'),
+			Config.server.get('options'),
+			(m) => this.parse(m)
+		);;
 	}
 
-	send(message, roomid='') { // eslint-disable-line space-infix-ops
-		csp.putAsync(this.outCh, [message, roomid]);
+	send(message, roomid) {
+		this.connection.send(message, roomid);
 	}
 
-	parseBlock(message) {
-		let lines = message.split('\n');
-		lines.forEach(this.parse, this);
+	getTargetRoom(message) {
+		// Typically, the first line of a message sent from the server includes
+		// the ID of the room the message was sent from. Lobby and the global
+		// rooms don't, since they're obviously not rooms in any shape or form,
+		// so if a message originated from either of those rooms, we have to
+		// determine which room it was implicitly.
+		if (message.startsWith('>')) {
+			let idx = message.indexOf('\n');
+			return message.slice(1, idx);
+		}
+
+		// Because PS protocol is very consistent, some command responses don't
+		// bother to follow it. Luckily, the global room can't send these.
+		if (!message.startsWith('|')) return 'lobby';
+
+		// The only other way we can tell which room the message came from is
+		// its type, which is the first argument in a line; the global room
+		// only sends types of messages that no other room sends.
+		let type = message.split('|')[1];
+		if (messageTypes.getIn(['global', type])) return 'global';
+		if (messageTypes.getIn(['chat', type])) return 'lobby';
+		throw new TypeError(`Message sent from battle room with no roomid included...? Payload: ${payload}`);
+	}
+
+	parseBlock(block) {
+		let messages = block.split('\n');
+		let roomid = this.getTargetRoom(messages[0]);
+		if (roomid === 'global') return messages.forEach(m => this.parse(m));
 	}
 
 	parse(message) {

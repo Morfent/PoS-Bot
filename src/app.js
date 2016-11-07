@@ -20,7 +20,7 @@ for (let c of config) {
 	});
 	child.on('close', (code, signal) => {
 		console.log(`[${id}] Process closed with code ${code}, signal ${signal}.`);
-		if (children.has(child)) children.delete(child);
+		children.delete(child);
 		if (!children.size) {
 			console.log('All child processes closed; exiting.');
 			process.exit(0);
@@ -29,5 +29,5 @@ for (let c of config) {
 
 	children.add(child);
 
-	console.log(`[${id}]: Initialized process with PID ${child.pid}`);
+	console.log(`[${id}] Initialized process with PID ${child.pid}`);
 }
