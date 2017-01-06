@@ -15,14 +15,14 @@ class Bot {
 
 		// TODO: get list of rooms from |queryresponse|rooms to determine if
 		// they're public or not.
-		// this.roomsData = Set();
+		// this.roomsData = new Set();
 
 		this.connection = new Connection(
 			Config.server.get('url'),
 			Config.server.get('_reserved'),
 			Config.server.get('options'),
 			(m) => this.parse(m)
-		);;
+		);
 	}
 
 	send(message, roomid) {
